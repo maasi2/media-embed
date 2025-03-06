@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico"/>
+  <title>some embed site</title>
+  <meta property="og:image" content="">
+  <meta property="og:type" content="video.other">
+  <meta property="og:video:url" content="">
+  <meta property="og:video:width" content="2048">
+  <meta property="og:video:height" content="858">
+  <script>
+    // クエリパラメータ（?url=）から動画URLを取得
+    function getVideoUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const videoUrl = params.get('url');
+
+      // URLのバリデーション
+      if (videoUrl && videoUrl.startsWith("https://media.masiyu.jp/") && videoUrl.endsWith(".mp4")) {
+        return videoUrl;
+      }
+      return null;
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+      const videoUrl = getVideoUrl();
+      if (videoUrl) {
+        document.querySelector('meta[property="og:image"]').setAttribute("content", videoUrl);
+        document.querySelector('meta[property="og:video:url"]').setAttribute("content", videoUrl);
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Hi</h1>
+  <p>Just your friendly video embed site</p>
+</body>
+</html>
